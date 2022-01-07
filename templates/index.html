@@ -19,14 +19,17 @@
                 </tr>
                 {% endfor %}
             </tbody>
-            
-           
         </table>
-          <form id="form" action="">
+          <form id="form" method="POST">
               <label for="guess">Enter a guess:</label>
-              <input type="text" name="guess" id="guess" placeholder="word">
+              <input type="text" name="guess" id="guess" placeholder="word" autofocus>
               <button>Submit</button>
           </form>
+          <div id="game-data">
+              <p class="msg">
+                  <!-- add response messages -->
+              </p>
+          </div>
     </div>
 
     <script src="http://unpkg.com/jquery"></script>
