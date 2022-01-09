@@ -1,8 +1,13 @@
 form = document.getElementById('form');
 $guess = $('#guess');
+score = 0;
 
 function displayMessage(msg) {
 	$('.msg').text(msg);
+}
+
+function updateScore(score) {
+	$('.score').text(`Score: ${score}`);
 }
 
 form.addEventListener('submit', async function(e) {
@@ -18,6 +23,8 @@ form.addEventListener('submit', async function(e) {
 	}
 	if (res.data.result === 'ok') {
 		displayMessage(`'${word}' was accepted.`);
+		score = score + word.length;
+		updateScore(score);
 	}
 	guess.value = '';
 });
