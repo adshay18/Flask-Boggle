@@ -1,6 +1,7 @@
-form = document.getElementById('form');
-$guess = $('#guess');
-score = 0;
+const form = document.getElementById('form');
+const $guess = $('#guess');
+let score = 0;
+let acceptedWords = new Set();
 
 function displayMessage(msg) {
 	$('.msg').text(msg);
@@ -22,9 +23,14 @@ async function hanldeSubmit(e) {
 		displayMessage(`'${word}' is not on this board.`);
 	}
 	if (res.data.result === 'ok') {
-		displayMessage(`'${word}' was accepted.`);
-		score = score + word.length;
-		updateScore(score);
+		if (acceptedWords.has(word)) {
+			displayMessage(`'${word}' has already been submitted.`);
+		} else {
+			displayMessage(`'${word}' was accepted.`);
+			score = score + word.length;
+			updateScore(score);
+			acceptedWords.add(word);
+		}
 	}
 	guess.value = '';
 }
