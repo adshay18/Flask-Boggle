@@ -1,6 +1,7 @@
 from boggle import Boggle
-from flask import Flask, render_template, session, request, jsonify
+from flask import Flask, render_template, session, request, jsonify, redirect
 from flask_debugtoolbar import DebugToolbarExtension
+import pdb
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "boggleme"
@@ -26,3 +27,19 @@ def test_word():
     response = boggle_game.check_valid_word(game_board, word)
 
     return jsonify({'result': response})
+
+@app.route('/score-game', methods=["POST"])
+def update_score():
+    '''Takes game score, compares it to high score, and updates number of games played.'''
+    
+    score = request.json["score"]
+    plays = session.get("plays", 0)
+    high_score = session.get("high_score", 0)
+    
+    session["score"] = score
+    session["plays"] = plays + 1
+    if score > high_score:
+        high_score = score
+        session["high_score"] = high_score
+    
+    return jsonify({'score': score, 'plays': session["plays"], 'high_score': high_score})

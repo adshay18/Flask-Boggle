@@ -37,8 +37,16 @@ async function hanldeSubmit(e) {
 
 form.addEventListener('submit', hanldeSubmit);
 
+async function endGame() {
+	const res = await axios.post('/score-game', { score: score });
+	$('.score').hide();
+	$('#form').hide();
+	displayMessage(
+		`Game over! Your score was: ${score}, High Score: ${res.data.high_score}, Games Played: ${res.data.plays}`
+	);
+}
+
 setTimeout(function() {
 	form.removeEventListener('submit', hanldeSubmit);
-	alert(`Game over! Your score was: ${score}`);
-	$('#form').hide();
+	endGame();
 }, 60000);
