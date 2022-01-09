@@ -1,12 +1,8 @@
 from boggle import Boggle
 from flask import Flask, render_template, session, request, jsonify, redirect
-from flask_debugtoolbar import DebugToolbarExtension
-import pdb
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "boggleme"
-debug = DebugToolbarExtension(app)
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 boggle_game = Boggle()
 
