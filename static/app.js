@@ -10,7 +10,7 @@ function updateScore(score) {
 	$('.score').text(`Score: ${score}`);
 }
 
-form.addEventListener('submit', async function(e) {
+async function hanldeSubmit(e) {
 	e.preventDefault();
 	let word = $guess.val();
 	const res = await axios.get('/validate-word', { params: { word: word } });
@@ -27,4 +27,12 @@ form.addEventListener('submit', async function(e) {
 		updateScore(score);
 	}
 	guess.value = '';
-});
+}
+
+form.addEventListener('submit', hanldeSubmit);
+
+setTimeout(function() {
+	form.removeEventListener('submit', hanldeSubmit);
+	alert(`Game over! Your score was: ${score}`);
+	$('#form').hide();
+}, 60000);
