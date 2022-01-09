@@ -2,6 +2,7 @@ const form = document.getElementById('form');
 const $guess = $('#guess');
 let score = 0;
 let acceptedWords = new Set();
+$('.new').hide();
 
 function displayMessage(msg) {
 	$('.msg').text(msg);
@@ -44,6 +45,7 @@ async function endGame() {
 	displayMessage(
 		`Game over! Your score was: ${score}, High Score: ${res.data.high_score}, Games Played: ${res.data.plays}`
 	);
+	$('.new').show();
 }
 
 setTimeout(function() {
