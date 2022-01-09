@@ -1,3 +1,36 @@
 body {
 	background-color: #eee;
+	margin: 0 auto;
+	text-align: center;
+}
+
+table {
+	margin: auto;
+	width: 50%;
+}
+
+td {
+	width: 20%;
+	position: relative;
+}
+
+td:after {
+	content: '';
+	display: block;
+	margin-top: 100%;
+}
+
+td .content {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: white;
+	font-size: 20px;
+	color: rgb(5, 5, 126);
+	vertical-align: middle;
+}
+h1 {
+	color: rgb(197, 21, 21);
 }
